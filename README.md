@@ -1,6 +1,6 @@
 # jndata_power
 
-京能项目，Flink 任务
+Flink 任务
 
 ## 功能介绍
 
