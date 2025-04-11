@@ -2,6 +2,7 @@ package org.example;
 
 import com.taosdata.flink.cdc.TDengineCdcSource;
 import com.taosdata.flink.common.TDengineCdcParams;
+import com.taosdata.flink.common.TDengineConfigParams;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
@@ -93,6 +94,9 @@ public class BatchJob {
         config.setProperty(TDengineCdcParams.CONNECT_PASS, password);
         config.setProperty(TDengineCdcParams.VALUE_DESERIALIZER, CdcTableDeserializer.class.getName());
         config.setProperty(TDengineCdcParams.VALUE_DESERIALIZER_ENCODING, "UTF-8");
+        config.setProperty(TDengineConfigParams.PROPERTY_KEY_RECONNECT_RETRY_COUNT, "3");
+        config.setProperty(TDengineConfigParams.PROPERTY_KEY_ENABLE_AUTO_RECONNECT, "true");
+        config.setProperty(TDengineConfigParams.PROPERTY_KEY_RECONNECT_INTERVAL_MS, "3000");
         // 订阅 topic：power_topic，获取点位的 current 数据
         return new TDengineCdcSource<CdcTable>(map.get("topic"), config, CdcTable.class);
     }

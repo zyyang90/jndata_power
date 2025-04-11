@@ -161,8 +161,9 @@ public class WriteSumAsyncFunction extends RichMapFunction<CdcProcessResult, Str
                 (row.getPoint_unit() == null ? "NULL" : "'" + row.getPoint_unit() + "'") + ") " +
                 // values
                 "VALUES(now," + (row.getUnit_type() == null ? "NULL" : "'" + row.getUnit_type() + "'") + "," +
-                (row.getData_type() == null ? "NULL" : row.getData_type()) + ",NULL," + row.getData_value_float() +
-                ",0," + (row.getData_desc() == null ? "NULL" : "'" + row.getData_desc() + "'") + ",NULL,NULL)";
+                (row.getData_type() == null ? "NULL" : "'" + row.getData_type() + "'") + ",NULL," +
+                row.getData_value_float() + ",0," +
+                (row.getData_desc() == null ? "NULL" : "'" + row.getData_desc() + "'") + ",NULL,NULL)";
     }
 
     private ResultSet executeQueryWithRetry(String sql) throws SQLException {
